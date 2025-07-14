@@ -1,139 +1,426 @@
 table Employee
-	isHidden
 	lineageTag: 63799ae9-1b99-4762-ae04-59d4f66ad037
 
 	measure EmpCount = CALCULATE(COUNT([EmplID]), FILTER(ALL('Date'[PeriodNumber]), 'Date'[PeriodNumber] = MAX('Date'[PeriodNumber])))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 01210a97-c3dc-4030-af85-0df92bea1155
+
+		changedProperty = IsHidden
 
 	measure Seps = CALCULATE(COUNT([EmplID]), FILTER(Employee, NOT(ISBLANK(Employee[TermDate]))))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 9cee6ad0-4ed6-4060-9d0a-99e6620b2a36
+
+		changedProperty = IsHidden
 
 	measure Actives = CALCULATE([EmpCount], FILTER(Employee, ISBLANK(Employee[TermDate])))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 85d7360e-4032-4f77-9e4f-ebb90f83c025
+
+		changedProperty = IsHidden
 
 	measure 'New Hires' = SUM([isNewHire])
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 2150a28c-fd38-4cd0-8461-b8529472f84a
+
+		changedProperty = IsHidden
 
 	measure 'AVG Tenure Days' = AVERAGE([TenureDays])
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 847843f6-d136-4485-a733-e5d6591ae5cf
+
+		changedProperty = IsHidden
 
 	measure 'AVG Tenure Months' = ROUND([AVG Tenure Days]/30, 1)-1
 		formatString: 0
+		displayFolder: Original
 		lineageTag: 6dba930b-1a70-4cbe-b4e6-1068100e9f78
 
+		changedProperty = IsHidden
+
 	measure 'AVG Age' = ROUND(AVERAGE([Age]), 0)
+		displayFolder: Original
 		lineageTag: 04f0331c-57d6-4523-af61-5612ecf2ed20
+
+		changedProperty = IsHidden
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Sum of BadHires' = SUM([BadHires])
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 89ce9e6c-af01-4b71-935e-e32bd86f6b37
+
+		changedProperty = IsHidden
 
 	measure 'New Hires SPLY' = CALCULATE([New Hires],SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: d53f7711-4e53-4bb7-ba5a-8fd82e1404c6
+
+		changedProperty = IsHidden
 
 	measure 'Actives SPLY' = CALCULATE([Actives],SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 84bdbb48-7b97-4285-9774-c747379163f6
+
+		changedProperty = IsHidden
 
 	measure 'Seps SPLY' = CALCULATE([Seps],SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 74a51ca4-495d-49ba-a27c-e74cf32c23db
+
+		changedProperty = IsHidden
 
 	measure 'EmpCount SPLY' = CALCULATE(COUNT([EmplID]), FILTER(ALL('Date'[PeriodNumber]), 'Date'[PeriodNumber] = MAX('Date'[PeriodNumber])),SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 5d72d359-a2ce-4e62-8c82-605f5d8879fb
+
+		changedProperty = IsHidden
 
 	measure 'Seps YoY Var' = [Seps]-[Seps SPLY]
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 4e89664a-40aa-412e-b07b-40b99f6f552d
+
+		changedProperty = IsHidden
 
 	measure 'Actives YoY Var' = [Actives]-[Actives SPLY]
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: ac589e5a-1a95-4e42-94ee-0ed615fa540e
+
+		changedProperty = IsHidden
 
 	measure 'New Hires YoY Var' = [New Hires]-[New Hires SPLY]
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: fd1f1b05-5d56-4bad-81e1-dd49cc74aa84
+
+		changedProperty = IsHidden
 
 	measure 'Seps YoY % Change' = DIVIDE([Seps YoY Var], [Seps SPLY])
 		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Original
 		lineageTag: 3a109bb7-2c23-4391-a6ce-20ce978286c3
+
+		changedProperty = IsHidden
 
 	measure 'Actives YoY % Change' = DIVIDE([Actives YoY Var], [Actives SPLY])
 		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Original
 		lineageTag: de0d73ca-3cfe-4e93-a63b-1a6643c2ed9a
+
+		changedProperty = IsHidden
 
 	measure 'New Hires YoY % Change' = DIVIDE([New Hires YoY Var], [New Hires SPLY])
 		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Original
 		lineageTag: 72d2e96f-621a-43df-8a76-ca8273685080
+
+		changedProperty = IsHidden
 
 	measure 'Bad Hires SPLY' = CALCULATE([Sum of BadHires],SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: 0b1de625-75ec-4294-a714-8f57065c755a
+
+		changedProperty = IsHidden
 
 	measure 'Bad Hires YoY Var' = [Sum of BadHires]-[Bad Hires SPLY]
 		formatString: #,0
+		displayFolder: Original
 		lineageTag: e9706dd4-704e-4702-b54f-a998cf479e5f
+
+		changedProperty = IsHidden
 
 	measure 'Bad Hires YoY % Change' = DIVIDE([Bad Hires YoY Var], [Bad Hires SPLY])
 		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Original
 		lineageTag: dfb9718f-7919-4d21-b555-602025a508e0
+
+		changedProperty = IsHidden
 
 	measure 'TO %' = DIVIDE([Seps], [Actives])
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: c528bf60-987a-410f-a8ca-3ce25b243dab
+
+		changedProperty = IsHidden
 
 	measure 'TO % Norm' = CALCULATE([TO %], all(Gender[Gender]), ALL(Ethnicity[Ethnicity]))
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: f21102a9-7e2f-41a3-9468-d3348065d7ee
+
+		changedProperty = IsHidden
 
 	measure 'TO % Var' = [TO %]-[TO % Norm]
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: 69bf92bc-0fd7-4503-bee1-c7d7391b0298
+
+		changedProperty = IsHidden
 
 	measure Sep%ofActive = DIVIDE([Seps],[Actives])
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: fbff1435-b8f2-4999-ba10-0c3daa356a0f
+
+		changedProperty = IsHidden
 
 	measure Sep%ofSMLYActives = DIVIDE([Seps SPLY],[Actives SPLY])
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: 8abf85c3-a19f-4e2d-9487-42e34b28e913
+
+		changedProperty = IsHidden
 
 	measure BadHire%ofActives = DIVIDE([Sum of BadHires],[Actives])
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: e4c439c2-f503-4c90-a2b4-3e1138baf3dc
+
+		changedProperty = IsHidden
 
 	measure BadHire%ofActiveSPLY = DIVIDE([Bad Hires SPLY],[Actives SPLY])
 		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Original
 		lineageTag: 1fc9db3d-1852-4b1a-8b0f-ae52d85a7f5f
 
+		changedProperty = IsHidden
+
 	measure blank = ""
+		displayFolder: Original
 		lineageTag: dd00c4da-a27d-44ba-9086-f92ba51b78a6
+
+		changedProperty = IsHidden
+
+	measure 'Average Tenure - Hourly' =
+			
+			CALCULATE(
+			    AVERAGE(Employee[TenureMonths]),
+			    PayType[PayType] = "Hourly"
+			)
+		displayFolder: New_Measures
+		lineageTag: c6e59127-b935-4846-a8c3-4f887b549b5a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Hires' = CALCULATE(COUNTROWS(Employee), FILTER(Employee, NOT(ISBLANK(Employee[HireDate]))))
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: 93112251-0ecd-4a46-b262-66dee86074fd
+
+		changedProperty = IsHidden
+
+	measure 'Total Terminations' = COUNTROWS(FILTER(Employee, NOT(ISBLANK(Employee[TermDate]))))
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: 00117f25-ef0f-47eb-a340-028ed0048323
+
+		changedProperty = IsHidden
+
+	measure 'Avg Tenure (Months)' = AVERAGE(Employee[TenureMonths])
+		formatString: 0.00
+		displayFolder: New_Measures
+		lineageTag: 73018457-f853-4a30-8d8f-44bd530e192f
+
+		changedProperty = IsHidden
+
+	measure '% New Hires' = ```
+			
+			VAR TotalEmployees = COUNTROWS(Employee)
+			VAR NewHires = 
+			    CALCULATE(
+			        COUNTROWS(Employee),
+			        Employee[isNewHire] = 1
+			    )
+			RETURN
+			DIVIDE(NewHires, TotalEmployees, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: ef568468-bb71-4abc-aed6-e620f9ca7514
+
+	measure 'Average Tenure by Pay Type' =
+			
+			CALCULATE(
+			    AVERAGE(Employee[TenureMonths]),
+			    ALLEXCEPT(Employee, Employee[PayTypeID])
+			)
+		displayFolder: New_Measures
+		lineageTag: 0d83a816-162f-4038-9fa4-72fb24c3fb23
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Female' = ```
+			
+			DIVIDE(
+			    [Total Female Hires], 
+			    [Total Hires],
+			    0
+			)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: 78de5719-52d6-4f97-a169-3b469659240d
+
+	measure 'Avg Age by Group' =
+			
+			CALCULATE(
+			    AVERAGE(Employee[Age]),
+			    ALLEXCEPT(Employee, Employee[AgeGroupID])
+			)
+		displayFolder: New_Measures
+		lineageTag: 8b1a53c2-10cd-4c4c-b4bc-947aa07ed2be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Retention Rate' =
+			
+			VAR Separations =
+			    CALCULATE(
+			        COUNTROWS(Employee),
+			        NOT(ISBLANK(Employee[TermDate]))
+			    )
+			VAR CurrentOrFormerEmployees =
+			    COUNTROWS(Employee)
+			RETURN
+			    1 - DIVIDE(Separations, CurrentOrFormerEmployees)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: 6776a287-1e79-45f0-a841-7e1331040d6a
+
+	measure '% < 1 Year Tenure' =
+			
+			VAR EmployeesUnder1Year =
+			    CALCULATE(
+			        COUNTROWS(Employee),
+			        Employee[TenureMonths] < 12,
+			        ISBLANK(Employee[TermDate])  -- still active
+			    )
+			VAR CurrentEmployees =
+			    CALCULATE(
+			        COUNTROWS(Employee),
+			        ISBLANK(Employee[TermDate])  -- still active
+			    )
+			RETURN
+			    DIVIDE(EmployeesUnder1Year, CurrentEmployees)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: c783ba77-53ff-42b3-ad81-058de7a61ff0
+
+	measure 'Total Female Hires' = ```
+			CALCULATE(
+						COUNTROWS(Employee), 
+						FILTER(Employee, 
+							NOT(ISBLANK(Employee[HireDate])) 
+							&&
+							RELATED(Gender[Gender]) = "Female"
+						)
+					)
+			```
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: 30f82528-7be1-4ed8-99dc-539daf9b2f5b
+
+	measure 'Total <30 Hires' = ```
+			CALCULATE(
+						COUNTROWS(Employee), 
+						FILTER(Employee, 
+							NOT(ISBLANK(Employee[HireDate])) 
+							&&
+							RELATED(AgeGroup[AgeGroup]) = "<30"
+						)
+					)
+			```
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: 8154eb5e-d27e-4804-b32d-138cbf12e520
+
+	measure '% <30 Hires' = DIVIDE([Total <30 Hires], [Total Hires], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: 8f877fbf-f3c5-4a4d-87db-b6ba965dc409
+
+	measure 'Bad Hire %' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS(Employee), Employee[BadHires] = 1),
+			    CALCULATE(COUNTROWS(Employee), Employee[isNewHire] = 1)
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: abcf9565-61fe-475d-8f5c-e42244ec580e
+
+	measure 'Adjusted Bad Hire %' =
+			
+			[Bad Hire %] * (1 - 'BadHireReduction%'[BadHireReduction% Value])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: New_Measures
+		lineageTag: bda2e622-5c42-4054-b03b-e85f70cafbe7
+
+	measure 'New Hire Count' =
+			
+			CALCULATE(COUNTROWS(Employee), Employee[isNewHire] = 1)
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: a32086d4-a49e-4254-b4b2-6efb5d621a5c
+
+	measure 'Adjusted Bad Hire Cost' = [Adjusted Bad Hire %] * [New Hire Count] * [Bad Hire Cost Value]
+		displayFolder: New_Measures
+		lineageTag: e2e43567-fcb0-446d-b9fa-180632a2d6dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bad Hire Cost' = [Bad Hire %] * [New Hire Count] * [Bad Hire Cost Value]
+		displayFolder: New_Measures
+		lineageTag: 31c4d12e-c276-4ce3-8d7a-1d178d6df0eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bad Hire Cost Value' = 50000
+		formatString: 0
+		displayFolder: New_Measures
+		lineageTag: 33d61c10-9b8e-414a-a574-7cb0fdca9de9
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Amount Difference' = [Bad Hire Cost] - [Adjusted Bad Hire Cost]
+		displayFolder: New_Measures
+		lineageTag: ed791fa0-955c-4f18-9012-a0aeacf47f9c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column date
 		dataType: dateTime
-		isHidden
 		formatString: General Date
 		lineageTag: b592a58d-3842-4a55-8945-59e53f471cdc
 		summarizeBy: none
 		sourceColumn: date
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column EmplID
 		dataType: int64
-		isHidden
 		lineageTag: 051997eb-138d-40ef-8553-615cfbd581fc
 		summarizeBy: count
 		sourceColumn: EmplID
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -141,19 +428,21 @@ table Employee
 
 	column Gender
 		dataType: string
-		isHidden
 		lineageTag: 5737742d-f701-48dd-8e2a-e21ce261dbd6
 		summarizeBy: none
 		sourceColumn: Gender
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column Age
 		dataType: int64
-		isHidden
 		lineageTag: 93554c39-0b06-429b-88b2-f50fedf69c07
 		summarizeBy: sum
 		sourceColumn: Age
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -161,25 +450,26 @@ table Employee
 
 	column EthnicGroup
 		dataType: string
-		isHidden
 		lineageTag: b02fa421-ff80-4cb6-9985-921c0d2a7481
 		summarizeBy: none
 		sourceColumn: EthnicGroup
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column FP
 		dataType: string
-		isHidden
 		lineageTag: 1d6b87b0-336b-44da-a4ac-70cd56accd30
 		summarizeBy: none
 		sourceColumn: FP
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column TermDate
 		dataType: dateTime
-		isHidden
 		formatString: General Date
 		lineageTag: 72be8ca7-8f53-496c-9ba8-a83249e90f06
 		summarizeBy: none
@@ -190,12 +480,15 @@ table Employee
 			relationship: e020e64e-e74a-4b8f-bed8-e879143ea6d8
 			defaultHierarchy: LocalDateTable_cc28ef26-f63a-4bc3-b357-93ab34cd6d9b.'Date Hierarchy'
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column isNewHire = IF(YEAR([date]) = YEAR([HireDate]) && MONTH([date])=MONTH([HireDate]), 1)
-		isHidden
 		lineageTag: ba9f7d94-e997-4d30-9273-714e4c123732
 		summarizeBy: sum
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -203,16 +496,16 @@ table Employee
 
 	column BU
 		dataType: string
-		isHidden
 		lineageTag: b4fdff84-3fed-44b4-8d9a-d98666fcd583
 		summarizeBy: none
 		sourceColumn: BU
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column HireDate
 		dataType: dateTime
-		isHidden
 		lineageTag: 4859e447-cd4c-4683-9373-43c6da347411
 		summarizeBy: none
 		sourceColumn: HireDate
@@ -222,30 +515,35 @@ table Employee
 			relationship: 3e454a13-2d74-4769-b44d-91ce492acf1a
 			defaultHierarchy: LocalDateTable_c04ce649-6e25-466f-9bbc-faabfec0fe29.'Date Hierarchy'
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column PayTypeID
 		dataType: string
-		isHidden
 		lineageTag: 2f2f5131-def6-4aac-b3a5-7b238793ec49
 		summarizeBy: none
 		sourceColumn: PayTypeID
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column TermReason
 		dataType: string
-		isHidden
 		lineageTag: 5fffba74-245a-4b8d-83c3-b13d6e5a1804
 		summarizeBy: none
 		sourceColumn: TermReason
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column AgeGroupID = IF([Age]<30, 1, IF([Age]<50, 2, 3))
-		isHidden
 		lineageTag: 7a1ddc46-6870-4a4f-9e17-8eb3f7cf59d1
 		summarizeBy: none
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -253,18 +551,20 @@ table Employee
 
 	column TenureDays = IF([date]-[HireDate]<0,[HireDate]-[date],[date]-[HireDate])
 		dataType: double
-		isHidden
 		lineageTag: 0bed3c87-3132-4c86-9ca9-062d49879474
 		summarizeBy: sum
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column TenureMonths = CEILING([TenureDays]/30, 1) -1
-		isHidden
 		lineageTag: 43a317e1-28a2-4655-846d-5ae946edbf7b
 		summarizeBy: sum
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -274,6 +574,8 @@ table Employee
 		dataType: double
 		lineageTag: f241b622-e9b2-44c2-b073-8124979b22c6
 		summarizeBy: sum
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -288,4 +590,6 @@ table Employee
 				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {{"date", type datetime}, {"EmplID", Int64.Type}, {"Gender", type text}, {"Age", Int64.Type}, {"EthnicGroup", type text}, {"FP", type text}, {"TermDate", type datetime}, {"BU", type text}, {"HireDate", type datetime}, {"PayTypeID", type text}, {"TermReason", type text}})
 				in
 				    #"Changed Type"
+
+	changedProperty = IsHidden
 

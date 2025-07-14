@@ -12,6 +12,8 @@ annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a
 
 annotation PBI_QueryOrder = ["BU","FP","PayType","SeparationReason","Date","Employee","Ethnicity","Gender","AgeGroup","Separation Reasons"]
 
+annotation PBI_ProTooling = ["DaxQueryView_Desktop"]
+
 ref table BU
 ref table FP
 ref table PayType
@@ -28,6 +30,7 @@ ref table LocalDateTable_c9dde99e-7ac1-4e8e-a5f2-c5ffc41d9cac
 ref table LocalDateTable_cc28ef26-f63a-4bc3-b357-93ab34cd6d9b
 ref table LocalDateTable_c04ce649-6e25-466f-9bbc-faabfec0fe29
 ref table 'Separation Reasons'
+ref table BadHireReduction%
 
 ref cultureInfo en-US
 

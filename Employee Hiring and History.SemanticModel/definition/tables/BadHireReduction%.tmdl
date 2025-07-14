@@ -1,0 +1,28 @@
+table BadHireReduction%
+	lineageTag: 83b00d9b-df20-4f10-a89b-4a2df40b7e30
+
+	measure 'BadHireReduction% Value' = SELECTEDVALUE('BadHireReduction%'[BadHireReduction%], 0)
+		lineageTag: 247dbe00-1653-4d8e-841c-814e22db55b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BadHireReduction%
+		lineageTag: 95901c88-ea63-41c7-8ac9-676d2c6c1c61
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition BadHireReduction% = calculated
+		mode: import
+		source = GENERATESERIES(-0.1, 0.1, 0.01)
+
+	annotation PBI_Id = d0d6b076f7304ae29dd1f4a7824c6024
+

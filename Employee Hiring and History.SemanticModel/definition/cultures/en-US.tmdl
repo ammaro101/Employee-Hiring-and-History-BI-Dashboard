@@ -7012,6 +7012,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.461
 			          }
+			        },
+			        {
+			          "Avg Tenure Per Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ],
 			      "Units": [
@@ -10001,72 +10011,6 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
-			    "date_yqm_has_year": {
-			      "Binding": {
-			        "ConceptualEntity": "Date"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "date.yqm": {
-			          "Target": {
-			            "Entity": "date.yqm"
-			          }
-			        },
-			        "date.yqm.year": {
-			          "Target": {
-			            "Entity": "date.yqm.year"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "date.yqm"
-			            },
-			            "Object": {
-			              "Role": "date.yqm.year"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "yqms_have_years"
-			        }
-			      ]
-			    },
-			    "date_month_end_date_date_hierarchy_has_date_month_end_date_day": {
-			      "Binding": {
-			        "ConceptualEntity": "Date"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "date.month_end_date.date_hierarchy": {
-			          "Target": {
-			            "Entity": "date.month_end_date.date_hierarchy"
-			          }
-			        },
-			        "date.month_end_date.day": {
-			          "Target": {
-			            "Entity": "date.month_end_date.day"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "date.month_end_date.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "date.month_end_date.day"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "month_end_date_hierarchies_have_month_end_days"
-			        }
-			      ]
-			    },
 			    "date_month_end_date_date_hierarchy_has_date_month_end_date_month": {
 			      "Binding": {
 			        "ConceptualEntity": "Date"
@@ -11218,6 +11162,26 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "employees_have_adjusted_bad_hire_cost"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "employee"
+			            },
+			            "Adjectives": [
+			              {
+			                "Adjusted": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "employee.adjusted_bad_hire_cost"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "adjusted_bad_hire_cost_indicates_how_Adjusted_employees_are"
 			        }
 			      ]
 			    },
@@ -11251,6 +11215,26 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "BadHireReduction_have_adjusted_bad_hire_cost"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "BadHireReduction"
+			            },
+			            "Adjectives": [
+			              {
+			                "Adjusted": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "employee.adjusted_bad_hire_cost"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "adjusted_bad_hire_cost_indicates_how_Adjusted_BadHireReduction_are"
 			        }
 			      ]
 			    },
@@ -14419,6 +14403,72 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.9,
 			          "ID": "dates_are_started_on_month_start_dates"
+			        }
+			      ]
+			    },
+			    "date_month_end_date_date_hierarchy_has_date_month_end_date_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Date"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.month_end_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.month_end_date.date_hierarchy"
+			          }
+			        },
+			        "date.month_end_date.day": {
+			          "Target": {
+			            "Entity": "date.month_end_date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.month_end_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.month_end_date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "month_end_date_hierarchies_have_month_end_days"
+			        }
+			      ]
+			    },
+			    "date_yqm_has_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Date"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.yqm": {
+			          "Target": {
+			            "Entity": "date.yqm"
+			          }
+			        },
+			        "date.yqm.year": {
+			          "Target": {
+			            "Entity": "date.yqm.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.yqm"
+			            },
+			            "Object": {
+			              "Role": "date.yqm.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "yqms_have_years"
 			        }
 			      ]
 			    },
